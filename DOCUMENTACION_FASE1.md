@@ -6,17 +6,16 @@
 ### 1. Información General del Proyecto
 
 #### **Título del Proyecto**
-**FreelanceFlow:** Plataforma SaaS para la Gestión Integral de Freelancers y Agencias con Soporte Multimoneda.
+**FreelanceFlow:** Plataforma SaaS para la Gestión Integral de Freelancers.
 
 #### **Breve Resumen**
-FreelanceFlow es una aplicación web diseñada para simplificar la administración de trabajadores independientes y pequeñas agencias. Permite centralizar la gestión de clientes (CRM), el seguimiento de proyectos y tareas, y un sistema automatizado de facturación que resuelve el problema de la volatilidad cambiaria mediante un motor de conversión dinámica entre Dólares (USD) y Bolivianos (Bs).
+FreelanceFlow es una aplicación web diseñada para simplificar la administración de trabajadores independientes y pequeñas agencias. Permite centralizar la gestión de clientes (CRM), el seguimiento de proyectos y tareas, y un sistema automatizado de facturación.
 
 #### **Problemática que resuelve**
-Muchos freelancers pierden tiempo valioso en tareas administrativas dispersas en hojas de cálculo y correos. Además, en mercados con fluctuación cambiaria (como el boliviano), calcular el valor real de sus servicios en diferentes divisas al momento de cobrar es un proceso manual propenso a errores. FreelanceFlow elimina esta fricción automatizando los cálculos y centralizando la información.
+Muchos freelancers pierden tiempo valioso en tareas administrativas dispersas en hojas de cálculo y correos. FreelanceFlow elimina esta fricción automatizando los cálculos y centralizando la información.
 
 #### **Objetivos del Proyecto**
 *   **Centralización:** Proveer un único punto de acceso para la gestión de clientes, proyectos y cobros.
-*   **Automatización Financiera:** Implementar un sistema de conversión de moneda basado en un tipo de cambio global configurable.
 *   **Profesionalización:** Facilitar la generación de facturas en PDF profesionales y listas para enviar.
 *   **Visibilidad:** Ofrecer un Dashboard con métricas clave (ingresos pendientes, proyectos activos) en la moneda preferida del usuario.
 
@@ -28,16 +27,16 @@ El proceso de ingeniería de requisitos se dividió en cuatro etapas:
 
 1.  **Captura de Requisitos:** Se realizaron entrevistas con freelancers reales para identificar cuellos de botella en su facturación y seguimiento de tareas.
 2.  **Análisis:** Se priorizaron las funciones esenciales para un Producto Mínimo Viable (MVP), descartando inicialmente funciones complejas como pasarelas de pago externas.
-3.  **Especificación:** Se documentaron requisitos funcionales (ej. "El sistema debe permitir cambiar el T.C. global") y no funcionales (ej. "La interfaz debe ser responsiva").
+3.  **Especificación:** Se documentaron requisitos funcionales.
 4.  **Validación:** Pruebas de usabilidad sobre el Dashboard y el flujo de creación de facturas.
 
-#### **Diagrama de Casos de Uso (Resumen)**
+#### **Diagrama de Casos de Uso**
 *   **Actor:** Freelance (Usuario Autenticado).
 *   **Casos de Uso Principales:**
     *   Gestionar Clientes (CRUD).
     *   Gestionar Proyectos y Tareas.
-    *   Emitir Facturas Multimoneda.
-    *   Configurar Ajustes Globales (T.C. y Moneda).
+    *   Emitir Facturas.
+    *   Configurar Ajustes Globales.
 
 #### **Caso de Uso Extendido: Configuración de Tipo de Cambio**
 *   **Actor:** Freelance.
@@ -78,7 +77,7 @@ Se eligió el patrón **Model-View-Template (MVT)** de Django para la rapidez de
 **Metodología:** **Kanban (Ágil).**
 
 **Justificación:**
-Dado que el proyecto es un MVP con requisitos que evolucionan rápidamente (como el cambio de Bolívares a Bolivianos solicitado durante el desarrollo), Kanban permite un flujo continuo de trabajo. Se prioriza el "Work In Progress" (WIP) limitado para asegurar que cada funcionalidad (como el sistema de moneda) se termine y valide antes de pasar a la siguiente, permitiendo entregas incrementales y ajustes inmediatos basados en el feedback.
+Dado que el proyecto es un MVP con requisitos que evolucionan rápidamente , Kanban permite un flujo continuo de trabajo. Se prioriza el "Work In Progress" (WIP) limitado para asegurar que cada funcionalidad (como el sistema de moneda) se termine y valide antes de pasar a la siguiente, permitiendo entregas incrementales y ajustes inmediatos basados en el feedback.
 
 ---
 
