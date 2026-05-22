@@ -52,10 +52,15 @@ El proceso de ingeniería de requisitos se dividió en cuatro etapas:
 
 ### 3. Arquitectura de Software
 
-**Modelo Elegido:** Arquitectura Basada en Micro-Monolito con Enfoque Híbrido (MVT + REST).
+**Modelo Elegido:** Arquitectura Hexagonal (Patrón de Puertos y Adaptadores).
 
 **Justificación:**
-Se eligió el patrón **Model-View-Template (MVT)** de Django para la rapidez de desarrollo de la interfaz de usuario, complementado con **Django REST Framework (DRF)** para exponer una API escalable. Se utiliza **HTMX** en el frontend para lograr una experiencia de usuario dinámica (Single Page Application feel) sin la complejidad de un framework pesado como React, permitiendo actualizaciones parciales del Dashboard y listados sin recargar la página.
+Se eligió la **Arquitectura Hexagonal** para asegurar una separación clara entre la lógica de negocio (el Core) y los mecanismos de entrada/salida (Frameworks y Herramientas). Esta elección se justifica por los siguientes puntos:
+
+1.  **Independencia de Framework:** El núcleo de la aplicación (la lógica de conversión de moneda y gestión de proyectos) no depende directamente de Django, permitiendo que las reglas de negocio sean estables frente a cambios tecnológicos.
+2.  **Múltiples Adaptadores de Entrada:** El sistema permite la interacción tanto a través de una interfaz web dinámica (**Django Templates + HTMX**) como a través de una API programática (**Django REST Framework**).
+3.  **Desacoplamiento de Herramientas:** Los adaptadores de salida permiten que la persistencia (PostgreSQL) y la generación de documentos (WeasyPrint) se manejen como piezas intercambiables, facilitando el mantenimiento y la escalabilidad del SaaS.
+4.  **Facilidad de Pruebas:** Al aislar el núcleo, es posible realizar pruebas unitarias exhaustivas sobre la lógica financiera (Dólares vs. Bolivianos) sin necesidad de levantar toda la infraestructura de la base de datos o el servidor web.
 
 ---
 
