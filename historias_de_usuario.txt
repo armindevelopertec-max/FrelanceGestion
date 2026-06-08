@@ -1,0 +1,21 @@
+====================================================================================================
+                        TABLA DE HISTORIAS DE USUARIO - FREELANCEFLOW
+====================================================================================================
+
+| ID    | ROL       | DESEO (HISTORIA DE USUARIO)                               | BENEFICIO (VALOR DE NEGOCIO)             |
+|-------|-----------|-----------------------------------------------------------|------------------------------------------|
+| HU-01 | Freelance | Registrar mis clientes con su información de contacto.     | Centralizar mi CRM y evitar hojas Excel. |
+| HU-02 | Freelance | Ver un Dashboard con ingresos pendientes en mi moneda.    | Priorizar mis cobros de un vistazo.      |
+| HU-03 | Freelance | Emitir facturas que calculen automáticamente USD a Bs.    | Ahorrar tiempo y evitar errores de T.C.  |
+| HU-04 | Freelance | Descargar mis facturas en formato PDF profesional.        | Proyectar una mejor imagen ante clientes.|
+| HU-05 | Freelance | Definir un Tipo de Cambio global para todo el sistema.    | Mantener coherencia en todos mis cobros. |
+| HU-06 | Freelance | Organizar mis proyectos por estados (Activo/Completado).  | Saber exactamente qué trabajo está en curso.|
+| HU-07 | Admin     | Supervisar los usuarios registrados en la plataforma.      | Mantener el control de las suscripciones. |
+| HU-08 | Admin     | Acceder a logs de errores del sistema.                    | Resolver problemas técnicos rápidamente.  |
+
+====================================================================================================
+CRITERIOS DE ACEPTACIÓN GENERALES:
+- Las conversiones deben tener precisión de 4 decimales.
+- El Dashboard debe actualizarse automáticamente al cambiar la moneda preferida.
+- Las facturas PDF deben incluir el logo y datos del freelance.
+====================================================================================================
