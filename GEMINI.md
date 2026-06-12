@@ -5,15 +5,14 @@ Este es el Producto Mínimo Viable (MVP) para una plataforma de gestión de free
 ## 🚀 Tecnologías
 - **Backend:** Django 4.2+ & Django REST Framework
 - **Base de Datos:** PostgreSQL (Configurada)
-- **PDFs:** WeasyPrint
+- **Frontend Interactivo:** HTMX & Tailwind CSS
 - **Contenedores:** Docker
 
 ## 🛠️ Módulos Implementados
 1.  **Clientes (CRM):** Gestión de contactos y empresas.
 2.  **Proyectos:** Seguimiento de estados (Activo, Completado, etc.).
-3.  **Tareas:** Kanban simple con prioridades y fechas de entrega.
-4.  **Facturación:** Generación de facturas y **exportación a PDF**.
-5.  **Dashboard:** Métricas básicas (ingresos pendientes, proyectos activos).
+3.  **Tareas:** Kanban interactivo con prioridades y fechas de entrega.
+4.  **Dashboard:** Métricas básicas (conteo de clientes y proyectos activos).
 
 ## 🏃 Cómo ejecutar (Docker)
 Si tienes `docker` y `docker-compose` instalados:
@@ -41,7 +40,7 @@ Si prefieres probarlo localmente con SQLite primero:
 - **Admin:** `/admin/`
 - **API Base:** `/api/`
 - **Dashboard:** `/api/dashboard/`
-- **Descargar PDF Factura:** `/api/invoices/<id>/download_pdf/`
+- **Kanban de Tareas:** `/tasks/kanban/` (Vía HTMX)
 
 ## 🤖 Próximos Pasos (IA)
 - Integrar OpenAI/Anthropic para generar propuestas automáticas basadas en una descripción corta.

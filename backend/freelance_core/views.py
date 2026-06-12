@@ -12,10 +12,8 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.renderers import TemplateHTMLRenderer, JSONRenderer
 
-from weasyprint import HTML
-
-from .models import Client, Project, Task, Invoice, GlobalSetting
-from .serializers import ClientSerializer, ProjectSerializer, TaskSerializer, InvoiceSerializer
+from .models import Client, Project, Task
+from .serializers import ClientSerializer, ProjectSerializer, TaskSerializer
 
 # --- Vistas de la API (DRF) ---
 
@@ -43,107 +41,7 @@ class TaskViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return Task.objects.filter(project__client__user=self.request.user)
 
-class InvoiceViewSet(viewsets.ModelViewSet):
-    serializer_class = InvoiceSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_queryset(self):
-        return Invoice.objects.filter(project__client__user=self.request.user)
-
-    @action(detail=True, methods=['get'])
-    def download_pdf(self, request, pk=None):
-        invoice = self.get_object()
-        html_string = render_to_string('freelance_core/invoice_pdf.html', {'invoice': invoice})
-        html = HTML(string=html_string)
-        pdf = html.write_pdf()
-        
-        response = HttpResponse(pdf, content_type='application/pdf')
-        response['Content-Disposition'] = f'attachment; filename="factura_{invoice.invoice_number}.pdf"'
-        return response
-
 # --- Vistas del Dashboard e Interfaz (HTMX) ---
-
-@login_required
-@require_http_methods(["GET"])
-def invoice_list_view(request):
-    invoices = Invoice.objects.filter(project__client__user=request.user).order_by('-issue_date')
-    projects = Project.objects.filter(client__user=request.user)
-    
-    settings, _ = GlobalSetting.objects.get_or_create(user=request.user)
-    
-    context = {
-        'invoices': invoices, 
-        'projects': projects,
-        'preferred_currency': settings.preferred_currency
-    }
-    
-    return render(request, 'invoices.html', context)
-
-@login_required
-@require_http_methods(["POST"])
-def update_settings_view(request):
-    settings, created = GlobalSetting.objects.get_or_create(user=request.user)
-    exchange_rate = request.POST.get('exchange_rate')
-    preferred_currency = request.POST.get('preferred_currency')
-    
-    if exchange_rate:
-        settings.exchange_rate = exchange_rate
-    if preferred_currency:
-        settings.preferred_currency = preferred_currency
-    settings.save()
-    
-    return redirect(request.META.get('HTTP_REFERER', '/'))
-
-@login_required
-@require_http_methods(["POST"])
-def invoice_create_view(request):
-    project_id = request.POST.get('project_id')
-    invoice_number = request.POST.get('invoice_number')
-    amount = request.POST.get('amount')
-    currency = request.POST.get('currency', 'USD')
-    
-    # Obtener tipo de cambio global
-    settings, _ = GlobalSetting.objects.get_or_create(user=request.user)
-    exchange_rate = settings.exchange_rate
-    
-    due_date = request.POST.get('due_date')
-    
-    project = Project.objects.get(pk=project_id, client__user=request.user)
-    invoice = Invoice.objects.create(
-        project=project,
-        invoice_number=invoice_number,
-        amount=amount,
-        currency=currency,
-        exchange_rate=exchange_rate,
-        due_date=due_date
-    )
-    return redirect('invoice_list')
-
-@login_required
-@require_http_methods(["POST"])
-def invoice_update_view(request, pk):
-    invoice = Invoice.objects.get(pk=pk, project__client__user=request.user)
-    invoice.project_id = request.POST.get('project_id')
-    invoice.invoice_number = request.POST.get('invoice_number')
-    invoice.amount = request.POST.get('amount')
-    invoice.currency = request.POST.get('currency')
-    # No actualizamos el exchange_rate en edición para preservar el histórico de esa factura
-    # a menos que el usuario explícitamente quiera recalcularla (por simplicidad lo dejamos así)
-    invoice.due_date = request.POST.get('due_date')
-    invoice.status = request.POST.get('status')
-    invoice.save()
-    return redirect('invoice_list')
-
-@login_required
-@require_http_methods(["POST"])
-def invoice_mark_paid_view(request, pk):
-    try:
-        invoice = Invoice.objects.get(pk=pk, project__client__user=request.user)
-        invoice.status = 'paid'
-        invoice.save()
-        return render(request, 'partials/invoice_row.html', {'invoice': invoice})
-    except Invoice.DoesNotExist:
-        return HttpResponse(status=404)
 
 @method_decorator(login_required, name='dispatch')
 class DashboardView(APIView):
@@ -155,28 +53,9 @@ class DashboardView(APIView):
         clients_count = Client.objects.filter(user=user).count()
         active_projects = Project.objects.filter(client__user=user, status='active').count()
         
-        settings, _ = GlobalSetting.objects.get_or_create(user=user)
-        preferred_currency = settings.preferred_currency
-        
-        # Totales por moneda
-        pending_invoices = Invoice.objects.filter(
-            project__client__user=user, 
-            status='pending'
-        )
-        
-        total_pending = 0
-        for inv in pending_invoices:
-            if preferred_currency == 'USD':
-                total_pending += float(inv.amount_usd)
-            else:
-                total_pending += float(inv.amount_bob)
-        
         data = {
             'clients_count': clients_count,
             'active_projects': active_projects,
-            'total_pending': total_pending,
-            'preferred_currency': preferred_currency,
-            'exchange_rate': settings.exchange_rate,
         }
         
         if request.accepted_renderer.format == 'html':
@@ -216,13 +95,6 @@ def project_update_view(request, pk):
     project.status = request.POST.get('status')
     project.save()
     return redirect('project_list')
-
-@login_required
-@require_http_methods(["GET"])
-def invoice_edit_view(request, pk):
-    invoice = Invoice.objects.get(pk=pk, project__client__user=request.user)
-    projects = Project.objects.filter(client__user=request.user)
-    return render(request, 'invoice_edit.html', {'invoice': invoice, 'projects': projects})
 
 @login_required
 @require_http_methods(["GET"])
@@ -284,5 +156,59 @@ def project_delete_view(request, pk):
         project = Project.objects.get(pk=pk, client__user=request.user)
         project.delete()
     except Project.DoesNotExist:
+        pass
+    return HttpResponse("")
+
+@login_required
+@require_http_methods(["GET"])
+def task_kanban_view(request):
+    tasks = Task.objects.filter(project__client__user=request.user)
+    projects = Project.objects.filter(client__user=request.user)
+    
+    context = {
+        'todo_tasks': tasks.filter(status='todo'),
+        'doing_tasks': tasks.filter(status='doing'),
+        'done_tasks': tasks.filter(status='done'),
+        'projects': projects,
+    }
+    return render(request, 'tasks_kanban.html', context)
+
+@login_required
+@require_http_methods(["POST"])
+def task_create_view(request):
+    project_id = request.POST.get('project_id')
+    name = request.POST.get('name')
+    priority = request.POST.get('priority', 'medium')
+    due_date = request.POST.get('due_date')
+    
+    project = Project.objects.get(pk=project_id, client__user=request.user)
+    task = Task.objects.create(
+        project=project,
+        name=name,
+        priority=priority,
+        due_date=due_date if due_date else None
+    )
+    return redirect('task_kanban')
+
+@login_required
+@require_http_methods(["POST"])
+def task_update_status_view(request, pk):
+    task = Task.objects.get(pk=pk, project__client__user=request.user)
+    new_status = request.POST.get('status')
+    if new_status in ['todo', 'doing', 'done']:
+        task.status = new_status
+        task.save()
+    
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest' or request.headers.get('accept') == 'application/json':
+        return HttpResponse(status=204)
+    return redirect('task_kanban')
+
+@login_required
+@require_http_methods(["DELETE"])
+def task_delete_view(request, pk):
+    try:
+        task = Task.objects.get(pk=pk, project__client__user=request.user)
+        task.delete()
+    except Task.DoesNotExist:
         pass
     return HttpResponse("")

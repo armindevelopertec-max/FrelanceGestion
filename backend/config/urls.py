@@ -7,8 +7,7 @@ from freelance_core.views import (
     client_edit_view, client_update_view,
     project_list_view, project_create_view, project_delete_view,
     project_edit_view, project_update_view,
-    invoice_list_view, invoice_create_view, invoice_mark_paid_view,
-    invoice_edit_view, invoice_update_view, update_settings_view
+    task_kanban_view, task_create_view, task_update_status_view, task_delete_view
 )
 
 urlpatterns = [
@@ -27,10 +26,8 @@ urlpatterns = [
     path('proyectos/<int:pk>/', project_delete_view, name='project_delete'),
     path('proyectos/<int:pk>/editar/', project_edit_view, name='project_edit'),
     path('proyectos/<int:pk>/actualizar/', project_update_view, name='project_update'),
-    path('facturas/', invoice_list_view, name='invoice_list'),
-    path('facturas/nueva/', invoice_create_view, name='invoice_create'),
-    path('facturas/<int:pk>/pagar/', invoice_mark_paid_view, name='invoice_mark_paid'),
-    path('facturas/<int:pk>/editar/', invoice_edit_view, name='invoice_edit'),
-    path('facturas/<int:pk>/actualizar/', invoice_update_view, name='invoice_update'),
-    path('ajustes/actualizar/', update_settings_view, name='update_settings'),
+    path('tareas/', task_kanban_view, name='task_kanban'),
+    path('tareas/nueva/', task_create_view, name='task_create'),
+    path('tareas/<int:pk>/estado/', task_update_status_view, name='task_update_status'),
+    path('tareas/<int:pk>/eliminar/', task_delete_view, name='task_delete'),
 ]

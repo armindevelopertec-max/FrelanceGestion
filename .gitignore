@@ -24,6 +24,7 @@ wheels/
 # Virtual Environment
 venv/
 ENV/
+.venv/
 
 # Django
 *.log
@@ -35,16 +36,32 @@ media/
 
 # Environment variables
 .env
+.env.*
 
 # IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
+.project
+.pydevproject
+.settings/
 
 # OS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
 thumbs.db
 
 # Docker
 .docker-compose.override.yml
+docker-compose.override.yml
+
+# Backend specific ignores
+backend/db.sqlite3
+backend/staticfiles/
+backend/media/
