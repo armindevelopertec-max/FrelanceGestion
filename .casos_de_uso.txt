@@ -1,5 +1,5 @@
 ====================================================================================================
-                        TABLA DE CASOS DE USO - PROYECTO FREELANCEFLOW
+                        TABLA DE CASOS DE USO - PROYECTO ROOTDEV
 ====================================================================================================
 
 | ID    | CASO DE USO             | ACTOR     | DESCRIPCIÓN                                      | PRECONDICIÓN              |

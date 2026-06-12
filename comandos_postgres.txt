@@ -1,0 +1,47 @@
+# GUÍA RÁPIDA DE COMANDOS POSTGRESQL (RootDev)
+
+Este archivo contiene los comandos más útiles para interactuar con la base de datos de este proyecto.
+
+## 1. Acceso a la CLI (Usando el script del proyecto)
+Para entrar a la consola interactiva:
+./db_shell.sh
+
+---
+
+## 2. Comandos dentro de PSQL (CLI de Postgres)
+Una vez dentro de la consola (`psql`), puedes usar estos comandos especiales (empiezan con \):
+
+- \l              : Listar todas las bases de datos.
+- \dt             : Listar todas las tablas de la base de datos actual.
+- \d nombre_tabla : Ver la estructura (columnas) de una tabla específica.
+- \du             : Listar usuarios y sus roles.
+- \q              : Salir de la terminal de Postgres.
+
+---
+
+## 3. Consultas SQL Útiles (Ejemplos)
+
+### Ver todos los usuarios registrados:
+SELECT id, username, email, is_superuser FROM auth_user;
+
+### Ver los clientes del proyecto:
+SELECT id, name, company, email FROM freelance_core_client;
+
+### Ver proyectos activos:
+SELECT name, status FROM freelance_core_project WHERE status = 'active';
+
+### Borrar todas las tareas (CUIDADO):
+DELETE FROM freelance_core_task;
+
+---
+
+## 4. Comandos desde la Terminal (Bash)
+
+### Exportar la base de datos (Backup):
+pg_dump -h localhost -U admin freelance_db > backup.sql
+
+### Importar una base de datos:
+psql -h localhost -U admin freelance_db < backup.sql
+
+### Ver si el servidor está corriendo:
+pg_isready -h localhost -p 5432

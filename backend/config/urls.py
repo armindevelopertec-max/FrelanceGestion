@@ -7,7 +7,8 @@ from freelance_core.views import (
     client_edit_view, client_update_view,
     project_list_view, project_create_view, project_delete_view,
     project_edit_view, project_update_view,
-    task_kanban_view, task_create_view, task_update_status_view, task_delete_view
+    task_kanban_view, task_create_view, task_update_status_view, task_delete_view,
+    register_view
 )
 
 urlpatterns = [
@@ -15,6 +16,7 @@ urlpatterns = [
     path('api/', include('freelance_core.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('register/', register_view, name='register'),
     path('', DashboardView.as_view(), name='home'),
     path('clientes/', client_list_view, name='client_list'),
     path('clientes/nuevo/', client_create_view, name='client_create'),

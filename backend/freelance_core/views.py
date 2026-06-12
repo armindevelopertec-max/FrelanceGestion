@@ -5,6 +5,8 @@ from django.db.models import Sum
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login as auth_login
 
 from rest_framework import viewsets, permissions
 from rest_framework.views import APIView
@@ -212,3 +214,14 @@ def task_delete_view(request, pk):
     except Task.DoesNotExist:
         pass
     return HttpResponse("")
+
+def register_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})

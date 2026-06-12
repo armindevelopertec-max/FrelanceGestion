@@ -1,5 +1,5 @@
 ====================================================================================================
-                        TABLA DE HISTORIAS DE USUARIO - FREELANCEFLOW
+                        TABLA DE HISTORIAS DE USUARIO - ROOTDEV
 ====================================================================================================
 
 | ID    | ROL       | DESEO (HISTORIA DE USUARIO)                               | BENEFICIO (VALOR DE NEGOCIO)             |

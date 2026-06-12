@@ -65,3 +65,33 @@ docker-compose.override.yml
 backend/db.sqlite3
 backend/staticfiles/
 backend/media/
+
+# Node.js / Frontend (PlataformaFreelancer)
+node_modules/
+dist/
+.slidev/
+.vite-inspect/
+.remote-assets/
+components.d.ts
+auto-imports.d.ts
+.netlify/
+.vercel/
+pnpm-debug.log*
+
+# Database Backups & Local Data
+*.sql
+*.sqlite3
+*.sqlite3-journal
+postgres_data/
+
+# Generated Reports & Documents
+*.pdf
+*.log
+
+# Python Specific
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+.env.*
