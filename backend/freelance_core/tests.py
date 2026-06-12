@@ -78,15 +78,12 @@ class RootDevTests(TestCase):
         response = self.client.post('/register/', {
             'username': 'newuser',
             'password': 'newpassword123',
-            'password_confirm': 'newpassword123' # UserCreationForm suele requerir confirmación
+            'password_confirm': 'newpassword123' 
         })
-        # Si el formulario es el estándar UserCreationForm, los campos son username, password1, password2
-        # Vamos a intentar el registro simulando el comportamiento esperado
+
         user_exists = User.objects.filter(username='newuser').exists()
-        # Nota: Dependiendo de la implementación exacta de register_view, 
-        # puede que necesites ajustar los nombres de los campos (password1, password2)
+  
         
-        # Como no puedo ver el HTML del form exacto, pruebo con los campos de Django por defecto
         response = self.client.post('/register/', {
             'username': 'realnewuser',
             'password1': 'newpassword123',

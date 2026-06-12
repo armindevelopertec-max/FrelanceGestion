@@ -26,6 +26,13 @@ mdc: true
   </span>
 </div>
 
+<!-- 
+TIEMPO: 0:30
+- Presentarse.
+- Mencionar el nombre del proyecto: RootDev.
+- Indicar que es para la materia INS-600.
+-->
+
 ---
 layout: center
 class: text-center
@@ -37,23 +44,33 @@ class: text-center
 
 Centraliza toda la información, permitiendo un mejor seguimiento de actividades, control de tiempos y organización del trabajo mediante herramientas modernas como tableros **Kanban** y **Dashboards** interactivos.
 
+<!-- 
+TIEMPO: 0:30
+- Definir RootDev: Una solución SaaS para freelancers.
+- Objetivo principal: Centralización y optimización del flujo de trabajo.
+-->
+
 ---
 
 # Problemática y Objetivos 🎯
 
 ### La Problemática
-* ❌ Pérdida de información por uso de herramientas dispersas (Excel, correos).
-* ❌ Falta de seguimiento de proyectos y priorización de tareas.
-* ❌ Baja eficiencia operativa y dificultad para medir productividad.
+* ❌ Pérdida de información por uso de herramientas dispersas.
+* ❌ Falta de seguimiento de proyectos.
 
 ### Objetivo General
 Desarrollar una plataforma web para la gestión integral de clientes, proyectos y tareas orientada a freelancers.
 
 ### Objetivos Específicos
 * ✅ Centralizar la gestión de clientes.
-* ✅ Organizar proyectos asociados a clientes.
-* ✅ Gestionar tareas mediante Kanban.
+* ✅ Organizar proyectos asociados.
 * ✅ Visualizar métricas y exponer servicios **REST**.
+
+<!-- 
+TIEMPO: 0:45
+- Explicar el dolor del usuario: El desorden de usar Excel o correos.
+- Mencionar que RootDev ataca directamente esa ineficiencia.
+-->
 
 ---
 
@@ -63,36 +80,45 @@ Desarrollar una plataforma web para la gestión integral de clientes, proyectos 
   <div>
     <h3 class="text-primary font-bold">Funcionales (RF)</h3>
     <ul class="text-xs list-disc pl-4">
-      <li>Registro y Autenticación de usuarios.</li>
-      <li>CRUD completo de Clientes.</li>
-      <li>Gestión de Proyectos vinculados a clientes.</li>
-      <li>Gestión de Tareas con estados dinámicos.</li>
-      <li>Dashboard de indicadores de productividad.</li>
-      <li>Exposición de servicios vía <b>API REST</b>.</li>
+      <li>Registro y Autenticación.</li>
+      <li>CRUD de Clientes y Proyectos.</li>
+      <li>Gestión de Tareas (Kanban).</li>
+      <li>Exposición de <b>API REST</b>.</li>
     </ul>
   </div>
   <div>
     <h3 class="text-primary font-bold">No Funcionales (RNF)</h3>
     <ul class="text-xs list-disc pl-4">
-      <li>Disponibilidad > 95%.</li>
-      <li>Interfaz amigable e intuitiva.</li>
-      <li>Seguridad robusta mediante autenticación.</li>
+      <li>Seguridad mediante autenticación.</li>
       <li>Persistencia con <b>PostgreSQL</b>.</li>
-      <li>Arquitectura desacoplada y escalable.</li>
+      <li>Interfaz intuitiva con Tailwind.</li>
     </ul>
   </div>
 </div>
 
+<!-- 
+TIEMPO: 0:30
+- No leer todo, solo resaltar: Autenticación, Kanban y API REST.
+- Mencionar que se buscó seguridad y persistencia sólida.
+-->
+
 ---
 
-# Arquitectura: Hexagonal (Puertos y Adaptadores) 🏗️
+# Arquitectura: Hexagonal 🏗️
 
 Elegida para separar la lógica de negocio de los detalles técnicos.
 
 *   **Independencia:** El núcleo es independiente del framework Django.
 *   **Testabilidad:** Facilita las pruebas unitarias del dominio.
 *   **Mantenibilidad:** Código más limpio y fácil de evolucionar.
-*   **Flexibilidad:** Permite cambiar adaptadores (DB, UI, APIs) con mínimo impacto.
+*   **Flexibilidad:** Permite cambiar adaptadores (DB, UI) con mínimo impacto.
+
+<!-- 
+TIEMPO: 0:50
+- EXPLICAR BIEN: Es el pilar técnico. 
+- La lógica de negocio está protegida de cambios externos.
+- Facilita los tests que veremos más adelante.
+-->
 
 ---
 
@@ -105,9 +131,13 @@ Elegida para separar la lógica de negocio de los detalles técnicos.
 | **Backend** | Django 4.2.30 |
 | **API REST** | Django REST Framework 3.17.1 |
 | **Base de Datos** | PostgreSQL + Django ORM |
-| **Interactividad** | HTMX |
-| **Estilos** | Tailwind CSS |
-| **Otros** | WhiteNoise, Dotenv, WeasyPrint |
+| **Interactividad** | HTMX + Tailwind CSS |
+
+<!-- 
+TIEMPO: 0:20
+- Rápido: Usamos Python/Django por su robustez y PostgreSQL para datos críticos.
+- HTMX para no sobrecargar el frontend.
+-->
 
 ---
 background: https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=1920
@@ -122,74 +152,72 @@ Desarrollo iterativo e incremental organizado en fases:
     <thead class="bg-primary text-white">
       <tr>
         <th class="px-4 py-3 font-bold uppercase text-xs tracking-wider">Sprint</th>
-        <th class="px-4 py-3 font-bold uppercase text-xs tracking-wider">Objetivo Principal</th>
-        <th class="px-4 py-3 font-bold uppercase text-xs tracking-wider">Entregables Clave</th>
+        <th class="px-4 py-3 font-bold uppercase text-xs tracking-wider">Objetivo</th>
+        <th class="px-4 py-3 font-bold uppercase text-xs tracking-wider">Entregables</th>
       </tr>
     </thead>
     <tbody class="divide-y divide-gray-200 dark:divide-gray-800 text-sm">
-      <tr class="hover:bg-primary/5 transition-colors">
+      <tr>
         <td class="px-4 py-4 font-bold text-primary">Sprint 1</td>
-        <td class="px-4 py-4 italic">Cimientos y Seguridad</td>
-        <td class="px-4 py-4 text-xs">Configuración Base, PostgreSQL, Auth de Usuarios y CRUD de Clientes.</td>
+        <td class="px-4 py-4 italic">Seguridad</td>
+        <td class="px-4 py-4 text-xs">Auth y Clientes.</td>
       </tr>
-      <tr class="hover:bg-primary/5 transition-colors">
+      <tr>
         <td class="px-4 py-4 font-bold text-primary">Sprint 2</td>
-        <td class="px-4 py-4 italic">Operación Core</td>
-        <td class="px-4 py-4 text-xs">Gestión de Proyectos, Tareas y Tablero Kanban interactivo con HTMX.</td>
+        <td class="px-4 py-4 italic">Operación</td>
+        <td class="px-4 py-4 text-xs">Kanban y Proyectos.</td>
       </tr>
-      <tr class="hover:bg-primary/5 transition-colors">
+      <tr>
         <td class="px-4 py-4 font-bold text-primary">Sprint 3</td>
-        <td class="px-4 py-4 italic">Métricas y Conectividad</td>
-        <td class="px-4 py-4 text-xs">Dashboard de Productividad y exposición de la API REST.</td>
+        <td class="px-4 py-4 italic">Métricas</td>
+        <td class="px-4 py-4 text-xs">Dashboard y API REST.</td>
       </tr>
     </tbody>
   </table>
 </div>
 
+<!-- 
+TIEMPO: 0:30
+- Dividido en 3 etapas claras: Desde la base segura hasta el análisis de datos.
+-->
+
 ---
 
 # Diagrama de Casos de Uso 👤
 
-<div class="grid grid-cols-2 gap-8 h-full items-center">
-  <div class="space-y-4">
-    <p class="text-lg opacity-90">Representación de las interacciones entre el <b>Freelancer</b> y las funcionalidades core del sistema.</p>
-    <div class="bg-primary/10 border-l-4 border-primary p-4 rounded-r shadow-sm">
-      <h4 class="font-bold text-primary">Puntos Clave:</h4>
-      <ul class="list-disc pl-5 text-sm">
-        <li>Gestión de Clientes (CRUD)</li>
-        <li>Administración de Proyectos</li>
-        <li>Control de Tareas y Kanban</li>
-        <li>Visualización de Métricas</li>
-      </ul>
-    </div>
+<div class="flex flex-col h-full">
+  <div class="bg-primary/10 border-l-4 border-primary p-2 mb-4 rounded-r shadow-sm">
+    <p class="text-sm opacity-90 italic text-center">Interacciones principales: Gestión de Clientes, Proyectos y Métricas.</p>
   </div>
-  <div class="relative group">
-    <div class="absolute -inset-1 bg-gradient-to-r from-primary to-blue-500 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
-    <div class="relative flex justify-center items-center bg-white dark:bg-gray-800 border-2 border-gray-100 dark:border-gray-700 rounded-lg p-2 h-80 shadow-xl overflow-hidden">
-      <img src="./images/DIAGRAMADECASOSDEUSO.png" class="h-full object-contain" />
-    </div>
+  <div class="flex-grow flex items-center justify-center bg-gray-50 rounded-2xl border border-gray-200 shadow-inner overflow-hidden p-4">
+    <img src="./images/DIAGRAMADECASOSDEUSO.png" class="max-w-full max-h-full object-contain transform scale-110 shadow-xl" />
   </div>
 </div>
+
+<!-- 
+TIEMPO: 0:30
+- El actor principal es el Freelancer.
+- Resaltar las 3 áreas de acción: Administrativa, Operativa y Analítica.
+-->
 
 ---
 
 # Diagrama de Clases 📊
 
 <div class="flex flex-col h-full">
-  <p class="mb-4">Estructura detallada de las entidades y la jerarquía de datos en <b>RootDev</b>.</p>
-  
-  <div class="flex-grow relative flex justify-center items-center bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-700 shadow-inner p-4 overflow-hidden">
-     <div class="absolute top-4 left-4 flex gap-2">
-       <div class="w-3 h-3 rounded-full bg-red-400"></div>
-       <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
-       <div class="w-3 h-3 rounded-full bg-green-400"></div>
-     </div>
+  <div class="flex-grow relative flex justify-center items-center bg-gray-50 rounded-xl border border-gray-200 p-4">
      <div class="flex flex-col items-center">
-        <img src="./images/DIAGRAMADECLASES.png" class="h-70 object-contain shadow-lg rounded border border-gray-200" />
-        <p class="text-sm font-mono text-primary opacity-60 bg-primary/5 px-4 py-2 rounded-full mt-4">Relación: User ➔ Client ➔ Project ➔ Task</p>
+        <img src="./images/DIAGRAMADECLASES.png" class="h-60 object-contain shadow-lg" />
+        <p class="text-sm font-mono text-primary mt-4">User ➔ Client ➔ Project ➔ Task</p>
      </div>
   </div>
 </div>
+
+<!-- 
+TIEMPO: 0:40
+- Explicar la jerarquía: Un usuario tiene N clientes, un cliente tiene N proyectos...
+- Es una estructura relacional sólida.
+-->
 
 ---
 
@@ -197,114 +225,126 @@ Desarrollo iterativo e incremental organizado en fases:
 
 <div class="grid grid-cols-2 gap-6 h-full pb-10">
   <div class="flex flex-col">
-    <h3 class="flex items-center gap-2 text-primary mb-2 font-bold"><carbon:flow-data /> Secuencia</h3>
-    <div class="flex-grow bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-2 flex flex-col items-center justify-center text-center shadow-md overflow-hidden text-sm">
-      <img src="./images/DIAGRAMADESECUENCIA.png" class="h-full object-contain" />
+    <h3 class="flex items-center gap-2 text-primary font-bold">Secuencia</h3>
+    <div class="flex-grow bg-white rounded-lg border p-2 flex items-center justify-center">
+      <img src="./images/DIAGRAMADESECUENCIA.png" class="h-40" />
     </div>
   </div>
   <div class="flex flex-col">
-    <h3 class="flex items-center gap-2 text-primary mb-2 font-bold"><carbon:connect-recursive /> Colaboración</h3>
-    <div class="flex-grow bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-2 flex flex-col items-center justify-center text-center shadow-md overflow-hidden text-sm">
-      <img src="./images/DIAGRAMADECOLABORACION.png" class="h-full object-contain" />
+    <h3 class="flex items-center gap-2 text-primary font-bold">Colaboración</h3>
+    <div class="flex-grow bg-white rounded-lg border p-2 flex items-center justify-center">
+      <img src="./images/DIAGRAMADECOLABORACION.png" class="h-40" />
     </div>
   </div>
 </div>
+
+<!-- 
+TIEMPO: 0:40
+- Secuencia: Cómo viajan los mensajes para crear una tarea.
+- Colaboración: Cómo se organizan los objetos estructuralmente.
+-->
 
 ---
 
 # Diagrama de Estados 🔄
 
 <div class="flex flex-col items-center justify-center h-full space-y-4">
-  <p class="text-lg">Control del ciclo de vida de una <b>Tarea</b>, garantizando la consistencia del flujo de trabajo.</p>
-  
-  <div class="w-full max-w-4xl h-80 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-2xl flex items-center justify-center relative overflow-hidden p-4">
+  <div class="w-full max-w-4xl h-70 bg-white rounded-2xl border shadow-xl flex items-center justify-center p-4">
     <img src="./images/DIAGRAMADEESTADOS.png" class="h-full object-contain" />
   </div>
 </div>
+
+<!-- 
+TIEMPO: 0:30
+- Ciclo de vida de una tarea: De Pendiente a Completada.
+- Es vital para el funcionamiento del Kanban.
+-->
 
 ---
 
 # Módulo: CRM y Gestión de Clientes 👥
 
-Centralización de la información de contacto y empresarial.
-
 <div class="grid grid-cols-2 gap-4">
   <div>
-    <ul>
-      <li><b>CRUD Completo:</b> Registro, edición y eliminación de clientes.</li>
-      <li><b>Seguridad:</b> Cada cliente está vinculado estrictamente al usuario autenticado.</li>
-      <li><b>Interfaz:</b> Tablas dinámicas con Tailwind CSS y HTMX para búsquedas rápidas.</li>
+    <ul class="text-sm">
+      <li><b>CRUD Completo</b> de Clientes.</li>
+      <li><b>Seguridad:</b> Datos aislados por usuario.</li>
     </ul>
-    <div class="mt-4 p-2 bg-white dark:bg-gray-800 border rounded shadow-sm overflow-hidden">
+    <div class="mt-4 p-2 bg-white border rounded shadow-sm overflow-hidden">
       <ZoomImg src="./images/login_register.png" class="w-full h-32 object-cover rounded" />
-      <p class="text-[8px] text-center mt-1 opacity-50 italic">Interfaz de Acceso Seguro</p>
     </div>
   </div>
-  <div class="flex items-center justify-center p-2 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 shadow-inner">
-    <ZoomImg src="./images/clientes.png" class="rounded shadow-lg border border-gray-200" />
+  <div class="flex items-center justify-center p-2 bg-gray-50 rounded-xl border">
+    <ZoomImg src="./images/clientes.png" class="rounded shadow-lg" />
   </div>
 </div>
+
+<!-- 
+TIEMPO: 0:40
+- ENTRAR EN DETALLE: Aquí empieza el zoom.
+- Mostrar la interfaz limpia y el acceso seguro.
+-->
 
 ---
 
 # Módulo: Proyectos y Tablero Kanban 📋
 
-El corazón operativo de RootDev.
-
 <div class="grid grid-cols-2 gap-6">
   <div class="text-xs space-y-4">
     <div class="bg-primary/5 p-3 rounded border-l-4 border-primary">
-      <h3 class="font-bold text-sm">Gestión de Proyectos</h3>
-      <p>Asociación jerárquica que permite organizar el trabajo por cliente.</p>
-      <ZoomImg src="./images/proyectos.png" class="mt-2 rounded shadow-sm border border-gray-200" />
+      <h3 class="font-bold text-sm text-primary">Gestión de Proyectos</h3>
+      <ZoomImg src="./images/proyectos.png" class="mt-2 rounded shadow-sm" />
     </div>
-    
-  
   </div>
-  <div class="flex items-center justify-center p-2 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 shadow-inner">
-    <ZoomImg src="./images/tareas.png" class="rounded shadow-lg border border-gray-200" />
+  <div class="flex items-center justify-center p-2 bg-gray-50 rounded-xl border">
+    <ZoomImg src="./images/tareas.png" class="rounded shadow-lg" />
   </div>
 </div>
+
+<!-- 
+TIEMPO: 0:50
+- EL CORAZÓN: Explica cómo el Kanban usa HTMX para actualizaciones sin recarga.
+- Haz zoom en las tareas para que vean el detalle.
+-->
 
 ---
 
 # Módulo: Dashboard de Productividad 📊
 
-Visualización de métricas en tiempo real para la toma de decisiones.
-
 <div class="flex flex-col h-full space-y-4">
-  <div class="grid grid-cols-3 gap-4 text-center">
-    <div class="p-2 bg-green-500/10 rounded border border-green-500/20"><span class="block text-xl font-bold">Clientes</span><span class="text-xs opacity-70">Total Registrados</span></div>
-    <div class="p-2 bg-blue-500/10 rounded border border-blue-500/20"><span class="block text-xl font-bold">Proyectos</span><span class="text-xs opacity-70">En Ejecución</span></div>
-    <div class="p-2 bg-purple-500/10 rounded border border-purple-500/20"><span class="block text-xl font-bold">Tareas</span><span class="text-xs opacity-70">Pendientes/Hechas</span></div>
-  </div>
-
-  <div class="flex-grow flex items-center justify-center p-4 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 shadow-xl overflow-hidden">
+  <div class="flex-grow flex items-center justify-center p-4 bg-white rounded-2xl border shadow-xl overflow-hidden">
     <ZoomImg src="./images/dashboard.png" class="max-h-full object-contain rounded" />
   </div>
 </div>
 
+<!-- 
+TIEMPO: 0:40
+- El valor agregado: El freelancer ve cuánto está produciendo en tiempo real.
+-->
+
 ---
 
-# Plan de Pruebas Detallado 🛡️
+# Plan de Pruebas Automatizado 🛡️
 
-Estrategia de validación en múltiples niveles.
+Puntos validados en el módulo `freelance_core`:
 
-1.  **Pruebas Unitarias:** Validación de lógica en modelos y formularios (Cobertura total en lógica core).
-2.  **Pruebas de Integración:** Verificación del flujo de datos entre ORM y Vistas.
-3.  **Pruebas Funcionales:** Simulación de navegación del usuario (Login -> Registro -> Dashboard).
-4.  **Pruebas de Seguridad:** Validación de redirecciones y acceso restringido.
+1.  **Creación de Entidades:** Registro correcto de Clientes, Proyectos y Tareas.
+2.  **Borrado en Cascada:** Validación de la integridad referencial en la base de datos.
+3.  **Protección de Rutas:** Verificación de redirección al Login para usuarios no autorizados.
+4.  **Gestión de Cuentas:** Validación de los flujos de Registro e Inicio de Sesión.
 
-<div class="mt-4 p-4 bg-gray-900 rounded-lg font-mono text-[10px] text-green-400 shadow-2xl">
+<div class="mt-4 p-4 bg-gray-900 rounded-lg font-mono text-[10px] text-green-400 shadow-2xl border border-white/10">
   $ python manage.py test freelance_core<br>
   Creating test database for alias 'default'...<br>
-  System check identified no issues (0 silenced).<br>
   .......<br>
-  ----------------------------------------------------------------------<br>
-  Ran 7 tests in 6.759s<br><br>
-  OK<br>
-  Destroying test database for alias 'default'...
+  Ran 7 tests in 6.759s | Result: OK
 </div>
+
+<!-- 
+TIEMPO: 0:30
+- Menciona que las pruebas son automatizadas y corren sobre PostgreSQL.
+- Cubren desde la creación de usuarios hasta el borrado en cascada.
+-->
 
 ---
 
@@ -313,46 +353,44 @@ Estrategia de validación en múltiples niveles.
 <div class="grid grid-cols-2 gap-4 h-full">
   <div class="text-xs">
     <table class="w-full">
-      <thead>
-        <tr class="border-b border-primary/30">
-          <th class="text-left py-2">Caso de Prueba</th>
-          <th class="text-left py-2">Estado</th>
-        </tr>
-      </thead>
-      <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-        <tr><td class="py-2">Registro de Usuarios</td><td class="py-2 text-green-500 font-bold">EXITOSO</td></tr>
-        <tr><td class="py-2">Autenticación (Login)</td><td class="py-2 text-green-500 font-bold">EXITOSO</td></tr>
-        <tr><td class="py-2">Protección de Rutas (Middleware)</td><td class="py-2 text-green-500 font-bold">EXITOSO</td></tr>
-        <tr><td class="py-2">Gestión de Clientes y Proyectos</td><td class="py-2 text-green-500 font-bold">EXITOSO</td></tr>
-        <tr><td class="py-2">Integridad Referencial (Cascada)</td><td class="py-2 text-green-500 font-bold">EXITOSO</td></tr>
+      <tbody class="divide-y">
+        <tr><td class="py-2">Auth y Registro</td><td class="py-2 text-green-600 font-bold">EXITOSO</td></tr>
+        <tr><td class="py-2">Middleware de Seguridad</td><td class="py-2 text-green-600 font-bold">EXITOSO</td></tr>
+        <tr><td class="py-2">Integridad de Datos</td><td class="py-2 text-green-600 font-bold">EXITOSO</td></tr>
       </tbody>
     </table>
-    <div class="mt-4 p-3 bg-primary/5 border-l-4 border-primary rounded">
-      <p class="font-bold text-primary">Resultado Final:</p>
-      <p class="italic">100% de las pruebas críticas superadas en entorno PostgreSQL.</p>
-    </div>
   </div>
   <div class="flex flex-col space-y-2">
-    <p class="text-xs font-bold text-center opacity-70">Endpoints API REST</p>
-    <div class="flex-grow bg-white dark:bg-gray-800 rounded border border-gray-200 p-2 shadow-inner overflow-hidden flex items-center justify-center text-sm">
+    <div class="flex-grow bg-white rounded border p-2 overflow-hidden flex items-center justify-center">
       <ZoomImg src="./images/APIREST.png" class="h-full object-contain" />
     </div>
   </div>
 </div>
 
+<!-- 
+TIEMPO: 0:30
+- Resumen final de validación. 
+- Mencionar la API REST como evidencia de conectividad.
+-->
+
 ---
 
 # Conclusiones y Futuro 🎓
 
-### Conclusiones
-* ✅ Se desarrolló una herramienta integral, robusta y escalable.
-* ✅ La arquitectura hexagonal permite una evolución técnica sin deuda técnica masiva.
-* ✅ HTMX reduce la complejidad del frontend manteniendo una experiencia de alta calidad.
+### Conclusiones (Cumplimiento de Objetivos)
+* ✅ **Gestión Centralizada:** Se logró unificar la información de clientes en un entorno seguro y accesible.
+* ✅ **Organización Operativa:** La estructura de proyectos y el tablero Kanban optimizan el seguimiento de tareas.
+* ✅ **Analítica y Conectividad:** El Dashboard y la API REST permiten la toma de decisiones basada en datos.
 
-### Próximos Pasos (Fase 3+)
-* 🤖 **IA Engine:** Predicción de tiempos basada en histórico de tareas.
-* 📱 **Mobile Native:** App en Flutter para gestión on-the-go.
-* 📈 **Analytics:** Reportes avanzados de rentabilidad por cliente.
+### Futuro
+* 🤖 Predicción con IA.
+* 📱 App Móvil.
+
+<!-- 
+TIEMPO: 0:30
+- El proyecto cumple todos los objetivos.
+- RootDev está listo para evolucionar.
+-->
 
 ---
 layout: center
@@ -363,8 +401,66 @@ background: https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=fo
 # ¡Gracias por su atención!
 
 **RootDev**
-*Carrera de Informática Industrial - I.T.E.I.S. "Pedro Domingo Murillo"*
+*Carrera de Informática Industrial*
 
 <div class="mt-10 flex justify-center gap-4 text-sm">
   <span>Estudiante: Armin Daniel Antonio Mendieta</span>
 </div>
+
+<!-- 
+TIEMPO: 0:05
+- Cierre y preguntas.
+-->
+
+<script setup>
+import { watch, onMounted } from 'vue'
+import { useNav } from '@slidev/client'
+
+const { next, currentPage } = useNav()
+
+/**
+ * CONFIGURACIÓN DE TIEMPOS (Total 600s = 10min)
+ * Cada número representa los segundos que durará ese slide antes de saltar.
+ */
+const slideTimes = [
+  30, // 1. Portada
+  30, // 2. Resumen
+  45, // 3. Problemática
+  30, // 4. Requisitos
+  50, // 5. Arquitectura
+  20, // 6. Plataforma
+  30, // 7. Metodología
+  30, // 8. Casos de Uso
+  40, // 9. Clases
+  40, // 10. Comportamiento
+  30, // 11. Estados
+  40, // 12. CRM
+  50, // 13. Kanban
+  40, // 14. Dashboard
+  30, // 15. Plan de Pruebas
+  30, // 16. Evidencias
+  30, // 17. Conclusiones
+  10  // 18. Despedida
+]
+
+onMounted(() => {
+  let timerId = null
+
+  // Observar el cambio de página para reiniciar el temporizador
+  watch(currentPage, (newPage) => {
+    // Limpiar cualquier temporizador activo
+    if (timerId) clearTimeout(timerId)
+
+    // Obtener segundos para el slide actual (ajustado a índice 0)
+    const seconds = slideTimes[newPage - 1]
+    
+    // Solo avanzar si no es el último slide
+    if (seconds && newPage < slideTimes.length) {
+      timerId = setTimeout(() => {
+        next()
+      }, seconds * 1000)
+    }
+  }, { immediate: true })
+})
+</script>
+
