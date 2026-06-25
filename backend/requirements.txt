@@ -2,7 +2,5 @@ Django>=4.2,<5.0
 djangorestframework
 psycopg2-binary
 python-dotenv
-weasyprint
 whitenoise
 django-cors-headers
-django-extensions
