@@ -1,0 +1,21 @@
+====================================================================================================
+                        TABLA DE CASOS DE USO - PROYECTO ROOTDEV
+====================================================================================================
+
+| ID    | CASO DE USO             | ACTOR     | DESCRIPCIÓN                                      | PRECONDICIÓN              |
+|-------|-------------------------|-----------|--------------------------------------------------|---------------------------|
+| UC-01 | Gestionar Clientes      | Freelance | Crear, editar y eliminar contactos de clientes.  | Usuario autenticado.      |
+| UC-02 | Gestionar Proyectos     | Freelance | Registro y seguimiento de estados de proyectos.  | Cliente debe existir.     |
+| UC-03 | Gestionar Tareas        | Freelance | Control de hitos con prioridades (Kanban).       | Proyecto debe existir.    |
+| UC-04 | Visualizar Dashboard    | Freelance | Ver métricas de clientes y proyectos activos.    | Usuario autenticado.      |
+| UC-05 | Autenticación           | Freelance | Iniciar y cerrar sesión de forma segura.         | Cuenta registrada.        |
+| UC-06 | Gestionar Usuarios      | Admin     | Crear, suspender o eliminar cuentas de usuario. | Acceso Admin nivel Root.  |
+| UC-07 | Auditoría de Sistema    | Admin     | Ver registros de actividad y logs de errores.   | Acceso Admin nivel Root.  |
+| UC-08 | Mantenimiento de BD     | Admin     | Realizar backups o limpieza de datos antiguos.  | Acceso Admin nivel Root.  |
+
+====================================================================================================
+NOTAS: 
+- Los casos de uso de Administrador se gestionan a través del sitio administrativo de Django.
+- La interfaz dinámica para el Freelance es gestionada mediante HTMX y Tailwind CSS.
+- El sistema está preparado para escalar a módulos de facturación e IA en futuras fases.
+====================================================================================================
