@@ -1,2 +1,0 @@
-# Canonical dependency list lives in backend/requirements.txt.
--r backend/requirements.txt
